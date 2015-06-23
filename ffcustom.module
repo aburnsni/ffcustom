@@ -1,0 +1,28 @@
+<?php
+// $Id: ffcustom.module
+
+/**
+ * Implements hook_init().
+ */
+function ffcustom_init() {
+  global $theme_key;
+  if (strpos($theme_key, 'bootstrap')===FALSE) {
+    require_once(drupal_get_path('theme', 'bootstrap') . '/theme/process.inc');
+  }
+}
+
+function ffcustom_menu_alter(&$items) {
+  // Example - disable the page at node/add
+  $items ['node/add/node-gallery-image']['access callback'] = FALSE;
+}
+
+function ffcustom_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'department_description' && $view_mode == 'full' && arg(0) == 'node') {
+
+  if (isset($node->field_department['und'][0]['tid'])) {
+  
+  
+    drupal_goto('taxonomy/term/' . $node->field_department['und'][0]['tid']);
+    }
+  }
+}

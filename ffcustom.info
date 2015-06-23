@@ -1,0 +1,5 @@
+name = ffcustom // Name of the module
+// The description for the module which will appear in module listing page.
+description = Fleming Fulton Custom  module 
+package = ffcustom 
+core = 7.x
