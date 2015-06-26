@@ -25,3 +25,23 @@ function ffcustom_node_view($node, $view_mode, $langcode) {
     }
   }
 }
+
+// Prevent users from changing the department for descriptions
+function ffcustom_form_department_description_node_form_alter(&$form, &$form_state, $form_id) {
+  $role = user_role_load_by_name('Uber Manager');
+  if (!user_has_role($role->rid)) {
+    $form['field_department']['#access'] = 0;
+  }
+
+}
+
+function ffcustom_form_alter(&$form, &$form_state, $form_id) {
+//    if ($form_id == 'event_node_form') {
+//      print '<pre>';
+//      print($form_id);
+//      print_r($form);
+//      print '</pre>';
+//    }
+//  $form['keys_1']['#attributes']['placeholder'] = "Search...";
+}
+
