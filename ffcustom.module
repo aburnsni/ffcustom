@@ -35,6 +35,11 @@ function ffcustom_form_department_description_node_form_alter(&$form, &$form_sta
 
 }
 
+//  Disable Barcode URL value on audio file forms
+function ffcustom_form_audio_file_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['field_barcode']['und']['0']['value']['#attributes']['disabled'] = TRUE;
+}
+
 function ffcustom_form_alter(&$form, &$form_state, $form_id) {
 //    if ($form_id == 'event_node_form') {
 //      print '<pre>';
