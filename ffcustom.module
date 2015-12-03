@@ -41,12 +41,11 @@ function ffcustom_form_audio_file_node_form_alter(&$form, &$form_state, $form_id
 }
 
 function ffcustom_form_alter(&$form, &$form_state, $form_id) {
-//    if ($form_id == 'event_node_form') {
-//      print '<pre>';
-//      print($form_id);
-//      print_r($form);
-//      print '</pre>';
-//    }
+//      dpm($form);
+  if ($form['#node_edit_form']) {
+    // Disable Twitter textfield
+    $form['twitter']['status']['#attributes']['disabled'] = TRUE;
+  }
 //  $form['keys_1']['#attributes']['placeholder'] = "Search...";
 }
 
