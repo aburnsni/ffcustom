@@ -1,0 +1,10 @@
+/**
+ * Implements hook_enable()
+ */
+function ffcustom_enable() {
+    db_update('system')
+    ->fields(array('weight' => 999))
+    ->condition('type', 'module')
+    ->condition('name', 'ffcustom')
+    ->execute();
+}
