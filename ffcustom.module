@@ -32,7 +32,15 @@ function ffcustom_form_department_description_node_form_alter(&$form, &$form_sta
   if (!user_has_role($role->rid)) {
     $form['field_department']['#access'] = 0;
   }
+}
 
+// Prevent users from changing some publishing options
+function ffcustom_form_node_form_alter(&$form, &$form_state, $form_id) {
+  $role = user_role_load_by_name('Uber Manager');
+  if (!user_has_role($role->rid)) {
+    $form['options']['promote']['#attributes']['disabled'] = TRUE;
+    $form['options']['sticky']['#attributes']['disabled'] = TRUE;
+  }
 }
 
 //  Disable Barcode URL value on audio file forms
@@ -134,4 +142,10 @@ function ffcustom_file_url_alter(&$url) {
   if ($scheme && in_array($scheme, $protocols)) {
     $url = '//' . file_uri_target($url);
   }
+}
+
+// Prevent update checks
+function ffcustom_update_projects_alter(&$projects){
+    unset($projects['videojs']);
+    //dsm($projects);  // view a list of projects
 }
