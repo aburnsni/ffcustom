@@ -150,33 +150,3 @@ function ffcustom_update_projects_alter(&$projects){
     //dsm($projects);  // view a list of projects
 }
 
-/**
- * Return 404 for anonymous users when viewing unpublished nodes
- */
-/**
- * Implements hook_node_access().
- *
- * Allow users to view unpublished nodes, but modify them later to return 404 
- * in hook_view_node_alter().
- */
-function ffcustom_node_access($node, $op, $account) {
-  if ($op == 'view') {
-    return NODE_ACCESS_ALLOW;
-  }
-
-  return NODE_ACCESS_IGNORE;
-}
-
-/**
- * Implements hook_node_view_alter().
- *
- * Provide a 404 page for unpublished nodes.
- * Access is allowed through hook_node_access().
- */
-function ffcustom_node_view_alter(&$build) {
-  $node = $build['#node'];
-  if (user_is_anonymous() && $node->status == NODE_NOT_PUBLISHED) {
-    drupal_not_found();
-    drupal_exit();
-  }
-}
